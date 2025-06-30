@@ -7,6 +7,7 @@ let seq;
 
 if (process.env.DB_URL) {
     seq = new Sequelize(process.env.DB_URL);
+    seq.addModels(models)
 }
 else{
     seq = new Sequelize({
@@ -21,6 +22,7 @@ else{
 }
 
 export const sequelize = seq;
+console.log(sequelize);
 
 // export const sequelize = new Sequelize({
 //     dialect: 'postgres',
