@@ -6,8 +6,16 @@ dotenv.config();
 let seq;
 
 if (process.env.DB_URL) {
-    seq = new Sequelize(process.env.DB_URL);
-    seq.addModels(models)
+    seq = new Sequelize(process.env.DB_URL,{
+        dialect:'postgres',
+        dialectOptions:{
+            ssl:{
+                require:true,
+                rejectUnauthorized:false
+            }
+        }
+    });
+    seq.addModels(models);
 }
 else{
     seq = new Sequelize({
